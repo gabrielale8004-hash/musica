@@ -1,0 +1,9 @@
+---
+const song = Astro.props.song 
+---
+<div class="song-card w-full"> 
+    <img src={song.album.image.url} alt={song.title} class="w-full h-44 object-cover" />
+    <h2>{song.title}</h2> 
+    <p>{song.artist}</p>
+</div>
+

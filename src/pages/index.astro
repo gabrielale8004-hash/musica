@@ -1,17 +1,19 @@
 ---
+import Layout from "../layouts/layout.astro";
+import Songcard from "../components/songcard.astro";
 
+const response = await fetch('https://api.institutoalfa.org/api/songs');
+const { songs } = await response.json();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <div class="grid grid-cols-8 gap-4 p-14">
+      {
+        songs.map((song: any) => {
+          return (
+            <Songcard song={song} />
+          )
+        })
+      }
+    </div>
+</Layout>
