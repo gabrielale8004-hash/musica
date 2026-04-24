@@ -1,9 +1,26 @@
 ---
-const song = Astro.props.song 
+const { song } = Astro.props;
 ---
-<div class="song-card w-full"> 
-    <img src={song.album.image.url} alt={song.title} class="w-full h-44 object-cover" />
-    <h2>{song.title}</h2> 
-    <p>{song.artist}</p>
-</div>
 
+<div 
+  class="group relative bg-zinc-900/40 hover:bg-zinc-800/60 rounded-[1.5rem] p-4 transition-all duration-500 cursor-pointer song-card border border-white/[0.03] hover:border-blue-500/30 shadow-xl"
+  data-url={song.audio.url}
+  data-title={song.title}
+  data-artist={song.artist}
+  data-image={song.album.image.url}
+>
+  <div class="relative z-10">
+    <div class="relative aspect-square overflow-hidden rounded-[1rem] mb-4 shadow-2xl">
+      <img src={song.album.image.url} alt={song.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+          <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.5)] transform translate-y-2 group-hover:translate-y-0 transition-transform">
+              <span class="material-symbols-outlined text-3xl">play_arrow</span>
+          </div>
+      </div>
+    </div>
+    <div class="px-1">
+      <h3 class="font-black text-[12px] text-white truncate uppercase italic tracking-tight group-hover:text-blue-400 transition-colors">{song.title}</h3>
+      <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-[0.2em] mt-1">{song.artist}</p>
+    </div>
+  </div>
+</div>
